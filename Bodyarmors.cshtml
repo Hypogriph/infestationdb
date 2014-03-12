@@ -1,0 +1,35 @@
+﻿@{
+    /*Add the following code to any page to add login restrictions
+    if (!WebSecurity.IsAuthenticated)
+    {
+    Response.Redirect("Login.cshtml");
+    }*/
+    Layout = "Layout.cshtml";
+    var db = Database.Open("infestationdb"); 
+    var query = db.Query("SELECT name_body,armor_body,protectlvl_body,hp_body FROM bodyarmors");
+}
+    
+<!DOCTYPE html>
+
+<html lang="en">
+    <body>
+        <h1>Body Armors</h1>
+        <table>
+        <tr>
+        <th>Name</th>
+        <th>Armor</th>
+        <th>Protection Level</th>
+        <th>Hit-Points</th>
+        </tr>
+        @foreach(var row in query)
+        {
+        <tr>
+        <td>@row.name_body</td>
+        <td>@row.armor_body</td>
+        <td>@row.protectlvl_body</td>
+        <td>@row.hp_body</td>
+        </tr>
+        }
+        </table>
+    </body>
+</html>
